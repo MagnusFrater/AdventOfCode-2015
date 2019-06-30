@@ -1,45 +1,39 @@
 package day01
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/MagnusFrater/AdventOfCode-2015/internal/test"
+)
 
 func TestPart1(t *testing.T) {
-	cases := []struct {
-		input    string
-		expected int
-	}{
-		{"(())", 0},
-		{"()()", 0},
-		{"(((", 3},
-		{"(()(()(", 3},
-		{"))(((((", 3},
-		{"())", -1},
-		{")))", -3},
-		{")())())", -3},
+	a := test.NewAssert(t)
+
+	var testCases = []test.Case{
+		{Input: "(())", Expected: 0},
+		{Input: "()()", Expected: 0},
+		{Input: "(((", Expected: 3},
+		{Input: "(()(()(", Expected: 3},
+		{Input: "))(((((", Expected: 3},
+		{Input: "())", Expected: -1},
+		{Input: ")))", Expected: -3},
+		{Input: ")())())", Expected: -3},
 	}
 
-	for _, c := range cases {
-		actual := Part1(c.input)
-
-		if actual != c.expected {
-			t.Errorf("Input: %q\tExpected: %d\tActual: %d", c.input, c.expected, actual)
-		}
+	for _, tc := range testCases {
+		a.Equals(tc, Part1(tc.Input.(string)))
 	}
 }
 
 func TestPart2(t *testing.T) {
-	cases := []struct {
-		input    string
-		expected int
-	}{
-		{")", 1},
-		{"()())", 5},
+	a := test.NewAssert(t)
+
+	testCases := []test.Case{
+		{Input: ")", Expected: 1},
+		{Input: "()())", Expected: 5},
 	}
 
-	for _, c := range cases {
-		actual := Part2(c.input)
-
-		if actual != c.expected {
-			t.Errorf("Input: %q\tExpected: %d\tActual: %d", c.input, c.expected, actual)
-		}
+	for _, tc := range testCases {
+		a.Equals(tc, Part2(tc.Input.(string)))
 	}
 }

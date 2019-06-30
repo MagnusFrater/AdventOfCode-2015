@@ -29,9 +29,7 @@ func Part2(input string) int {
 func travel(c rune) int {
 	if c == '(' {
 		return 1
-	} else if c == ')' {
-		return -1
 	}
 
-	return 0
+	return -1
 }
