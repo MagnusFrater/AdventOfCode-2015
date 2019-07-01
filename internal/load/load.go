@@ -10,7 +10,7 @@ import (
 func inputFileAsString(inputFilePath string) string {
 	buf, err := ioutil.ReadFile(inputFilePath)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	return string(buf)
