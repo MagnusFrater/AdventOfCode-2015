@@ -7,7 +7,7 @@ import (
 )
 
 // InputFileAsString returns the entire contents of the input file as a string.
-func inputFileAsString(inputFilePath string) string {
+func InputFileAsString(inputFilePath string) string {
 	buf, err := ioutil.ReadFile(inputFilePath)
 	if err != nil {
 		log.Fatal(err)
@@ -22,5 +22,5 @@ func Input(day string) string {
 		log.Fatal("Usage: ./day0" + day + " path/to/input")
 	}
 
-	return inputFileAsString(os.Args[1])
+	return InputFileAsString(os.Args[1])
 }
