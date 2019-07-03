@@ -1,4 +1,4 @@
-# Day 6
+# --- Day 6: Probably a Fire Hazard ---
 
 ## Part 1
 
