@@ -2,6 +2,7 @@ package circuit
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -102,31 +103,34 @@ func (c *Circuit) AddInstruction(instruction string) {
 		// connect input->formula
 		rshift.InputWire.addConnection(rshift)
 	} else { // SET
-		// create formula vertex
-		var set = set{
-			TargetWire: c.createWireIfNotExist(split[2]),
-		}
-
-		// check if input is signal or wire
-		var input = split[0]
-		signal, err := getUint16(input)
-		if err != nil {
-			// is wire
-			var inputWire = c.createWireIfNotExist(input)
-
-			// connect wire->formula
-			set.InputWire = inputWire
-			inputWire.addConnection(set)
-		} else {
-			// is signal
-			set.Signal = signal
-			c.addRoot(set)
-		}
+		c.createSet(split[0], split[2])
 	}
 }
 
-func (c *Circuit) addRoot(s set) {
+func (c *Circuit) createRoot(s set) {
 	c.roots = append(c.roots, &s)
+}
+
+func (c *Circuit) createSet(input, targetWireName string) {
+	// create formula vertex
+	var set = set{
+		TargetWire: c.createWireIfNotExist(targetWireName),
+	}
+
+	// check if input is signal or wire
+	signal, err := getUint16(input)
+	if err != nil {
+		// is wire
+		var inputWire = c.createWireIfNotExist(input)
+
+		// connect wire->formula
+		set.InputWire = inputWire
+		inputWire.addConnection(set)
+	} else {
+		// is signal
+		set.Signal = signal
+		c.createRoot(set)
+	}
 }
 
 func (c *Circuit) createWireIfNotExist(name string) *wire {
@@ -140,9 +144,30 @@ func (c *Circuit) createWireIfNotExist(name string) *wire {
 
 // Simulate propagates the signals through the circuit.
 func (c Circuit) Simulate() {
+	c.reset()
+
 	for _, root := range c.roots {
 		root.Formulate()
 	}
+}
+
+// reset sets all wires to un-simulated.
+func (c *Circuit) reset() {
+	for _, wire := range c.wires {
+		wire.Simulated = false
+	}
+}
+
+// SetRoot updates an existing root's signal, or creates a new root if the given target wire is non-existent.
+func (c Circuit) SetRoot(signal uint16, wireName string) {
+	for _, root := range c.roots {
+		if root.TargetWire.Name == wireName {
+			root.Signal = signal
+			return
+		}
+	}
+
+	c.createSet(strconv.Itoa(int(signal)), wireName)
 }
 
 // GetSignal returns the signal of the given wire.
