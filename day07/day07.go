@@ -1,0 +1,15 @@
+package day07
+
+import (
+	"github.com/MagnusFrater/AdventOfCode-2015/day07/circuit"
+)
+
+// Part1 returns the output for Day 07 part 1.
+func Part1(instructions []string) uint16 {
+	var circuit = circuit.New()
+	circuit.AddInstructions(instructions)
+	circuit.Simulate()
+	circuit.Print()
+
+	return circuit.GetSignal("a")
+}
