@@ -2,34 +2,39 @@ package day03
 
 import (
 	"testing"
-
-	"github.com/MagnusFrater/AdventOfCode-2015/internal/test"
 )
 
-func TestPart1(t *testing.T) {
-	a := test.NewAssert(t)
+type testCase struct {
+	Directions     string
+	ExpectedHouses int
+}
 
-	var testCases = []test.Case{
-		{Input: ">", Expected: 2},
-		{Input: "^>v<", Expected: 4},
-		{Input: "^v^v^v^v^v", Expected: 2},
+func TestPart1(t *testing.T) {
+	var testCases = []testCase{
+		{Directions: ">", ExpectedHouses: 2},
+		{Directions: "^>v<", ExpectedHouses: 4},
+		{Directions: "^v^v^v^v^v", ExpectedHouses: 2},
 	}
 
 	for _, tc := range testCases {
-		a.Equals(tc, Part1(tc.Input.(string)))
+		var houses = Part1(tc.Directions)
+		if houses != tc.ExpectedHouses {
+			t.Errorf("Directions: %v\tExpected: %v\tActual: %v\n", tc.Directions, tc.ExpectedHouses, houses)
+		}
 	}
 }
 
 func TestPart2(t *testing.T) {
-	a := test.NewAssert(t)
-
-	var testCases = []test.Case{
-		{Input: "^v", Expected: 3},
-		{Input: "^>v<", Expected: 3},
-		{Input: "^v^v^v^v^v", Expected: 11},
+	var testCases = []testCase{
+		{Directions: "^v", ExpectedHouses: 3},
+		{Directions: "^>v<", ExpectedHouses: 3},
+		{Directions: "^v^v^v^v^v", ExpectedHouses: 11},
 	}
 
 	for _, tc := range testCases {
-		a.Equals(tc, Part2(tc.Input.(string)))
+		var houses = Part2(tc.Directions)
+		if houses != tc.ExpectedHouses {
+			t.Errorf("Directions: %v\tExpected: %v\tActual: %v\n", tc.Directions, tc.ExpectedHouses, houses)
+		}
 	}
 }
