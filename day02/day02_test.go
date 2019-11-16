@@ -3,34 +3,44 @@ package day02
 import (
 	"strings"
 	"testing"
-
-	"github.com/MagnusFrater/AdventOfCode-2015/internal/test"
 )
 
 func TestPart1(t *testing.T) {
-	a := test.NewAssert(t)
+	type testCase struct {
+		Dimensions    string
+		ExpectedPaper int
+	}
 
-	var testCases = []test.Case{
-		{Input: "2x3x4", Expected: 58},
-		{Input: "1x1x10", Expected: 43},
+	var testCases = []testCase{
+		{Dimensions: "2x3x4", ExpectedPaper: 58},
+		{Dimensions: "1x1x10", ExpectedPaper: 43},
 	}
 
 	for _, tc := range testCases {
-		var input = strings.Split(tc.Input.(string), "\n")
-		a.Equals(tc, Part1(input))
+		var input = strings.Split(tc.Dimensions, "\n")
+		var paper = Part1(input)
+		if paper != tc.ExpectedPaper {
+			t.Errorf("Dimensions: %v\tExpected: %v\tActual: %v\n", tc.Dimensions, tc.ExpectedPaper, paper)
+		}
 	}
 }
 
 func TestPart2(t *testing.T) {
-	a := test.NewAssert(t)
+	type testCase struct {
+		Dimensions     string
+		ExpectedRibbon int
+	}
 
-	var testCases = []test.Case{
-		{Input: "2x3x4", Expected: 34},
-		{Input: "1x1x10", Expected: 14},
+	var testCases = []testCase{
+		{Dimensions: "2x3x4", ExpectedRibbon: 34},
+		{Dimensions: "1x1x10", ExpectedRibbon: 14},
 	}
 
 	for _, tc := range testCases {
-		var input = strings.Split(tc.Input.(string), "\n")
-		a.Equals(tc, Part2(input))
+		var input = strings.Split(tc.Dimensions, "\n")
+		var ribbon = Part2(input)
+		if ribbon != tc.ExpectedRibbon {
+			t.Errorf("Dimensions: %v\tExpected: %v\tActual: %v\n", tc.Dimensions, tc.ExpectedRibbon, ribbon)
+		}
 	}
 }

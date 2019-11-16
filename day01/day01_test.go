@@ -2,38 +2,43 @@ package day01
 
 import (
 	"testing"
-
-	"github.com/MagnusFrater/AdventOfCode-2015/internal/test"
 )
 
-func TestPart1(t *testing.T) {
-	a := test.NewAssert(t)
+type testCase struct {
+	Instructions  string
+	ExpectedFloor int
+}
 
-	var testCases = []test.Case{
-		{Input: "(())", Expected: 0},
-		{Input: "()()", Expected: 0},
-		{Input: "(((", Expected: 3},
-		{Input: "(()(()(", Expected: 3},
-		{Input: "))(((((", Expected: 3},
-		{Input: "())", Expected: -1},
-		{Input: ")))", Expected: -3},
-		{Input: ")())())", Expected: -3},
+func TestPart1(t *testing.T) {
+	var testCases = []testCase{
+		{Instructions: "(())", ExpectedFloor: 0},
+		{Instructions: "()()", ExpectedFloor: 0},
+		{Instructions: "(((", ExpectedFloor: 3},
+		{Instructions: "(()(()(", ExpectedFloor: 3},
+		{Instructions: "))(((((", ExpectedFloor: 3},
+		{Instructions: "())", ExpectedFloor: -1},
+		{Instructions: ")))", ExpectedFloor: -3},
+		{Instructions: ")())())", ExpectedFloor: -3},
 	}
 
 	for _, tc := range testCases {
-		a.Equals(tc, Part1(tc.Input.(string)))
+		var floor = Part1(tc.Instructions)
+		if floor != tc.ExpectedFloor {
+			t.Errorf("Input: %v:\tExpected: %v\tActual:%v\n", tc.Instructions, tc.ExpectedFloor, floor)
+		}
 	}
 }
 
 func TestPart2(t *testing.T) {
-	a := test.NewAssert(t)
-
-	testCases := []test.Case{
-		{Input: ")", Expected: 1},
-		{Input: "()())", Expected: 5},
+	testCases := []testCase{
+		{Instructions: ")", ExpectedFloor: 1},
+		{Instructions: "()())", ExpectedFloor: 5},
 	}
 
 	for _, tc := range testCases {
-		a.Equals(tc, Part2(tc.Input.(string)))
+		var floor = Part2(tc.Instructions)
+		if floor != tc.ExpectedFloor {
+			t.Errorf("Input: %v:\tExpected: %v\tActual:%v\n", tc.Instructions, tc.ExpectedFloor, floor)
+		}
 	}
 }

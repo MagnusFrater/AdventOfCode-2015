@@ -5,12 +5,12 @@ import (
 )
 
 func TestAddInstructions(t *testing.T) {
-	type Case struct {
+	type TestCase struct {
 		Instructions    []string
 		ExpectedSignals map[string]uint16
 	}
 
-	var tc = Case{
+	var tc = TestCase{
 		Instructions: []string{
 			"123 -> x",
 			"456 -> y",
