@@ -1,7 +1,6 @@
 package test
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -15,5 +14,5 @@ type Case struct {
 
 // Fail throws a testing.T.Error.
 func (tc Case) Fail(t *testing.T, actual interface{}) {
-	t.Error(fmt.Sprintf(DefaultErrorMessage, tc.Expected, actual, tc.Input))
+	t.Errorf(DefaultErrorMessage, tc.Expected, actual, tc.Input)
 }
