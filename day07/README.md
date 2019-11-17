@@ -43,4 +43,6 @@ x: 123
 y: 456
 ```
 
+## Part 2
+
 In little Bobby's kit's instructions booklet (provided as your puzzle input), what signal is ultimately provided to `wire` `a`?
