@@ -10,6 +10,6 @@ import (
 
 func main() {
 	input := strings.Split(load.Input("06"), "\n")
-	fmt.Println("Part 1:", day06.Part1(input), "lights on")
-	fmt.Println("Part 2:", day06.Part2(input), "total brightness")
+	fmt.Printf("Part 1: %v lights on\n", day06.Part1(input))
+	fmt.Printf("Part 2: %v total brightness\n", day06.Part2(input))
 }

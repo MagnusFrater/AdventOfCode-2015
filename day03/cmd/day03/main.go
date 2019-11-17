@@ -8,6 +8,6 @@ import (
 )
 
 func main() {
-	fmt.Println("Part 1:", day03.Part1(load.Input("3")), "houses")
-	fmt.Println("Part 2:", day03.Part2(load.Input("3")), "houses")
+	fmt.Printf("Part 1: %v houses\n", day03.Part1(load.Input("3")))
+	fmt.Printf("Part 2: %v houses\n", day03.Part2(load.Input("3")))
 }

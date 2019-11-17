@@ -10,6 +10,6 @@ import (
 
 func main() {
 	var input = strings.Split(load.Input("2"), "\n")
-	fmt.Println("Part 1:", day02.Part1(input), "ft^2")
-	fmt.Println("Part 2:", day02.Part2(input), "ft")
+	fmt.Printf("Part 1: %v ft^2\n", day02.Part1(input))
+	fmt.Printf("Part 2: %v ft\n", day02.Part2(input))
 }
