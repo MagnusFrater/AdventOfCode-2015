@@ -1,7 +1,10 @@
 package day06
 
 import (
+	"strings"
 	"testing"
+
+	"github.com/MagnusFrater/AdventOfCode-2015/internal/load"
 )
 
 type testCase struct {
@@ -24,6 +27,21 @@ func TestPart1(t *testing.T) {
 	}
 }
 
+func TestPart1_solution(t *testing.T) {
+	var testCase = struct {
+		Instructions   []string
+		ExpectedLights int
+	}{
+		Instructions:   strings.Split(load.InputFileAsString("input06.txt"), "\n"),
+		ExpectedLights: 377891,
+	}
+
+	var lights = Part1(testCase.Instructions)
+	if lights != testCase.ExpectedLights {
+		t.Errorf("Expected lights: %v\tActual lights: %v\n", testCase.ExpectedLights, lights)
+	}
+}
+
 func TestPart2(t *testing.T) {
 	var testCases = []testCase{
 		{Instructions: "turn on 0,0 through 0,0", ExpectedLights: 1},
@@ -35,5 +53,20 @@ func TestPart2(t *testing.T) {
 		if lights != tc.ExpectedLights {
 			t.Errorf("Instructions: %v\tExpected lights: %v\tActual lights: %v\n", tc.Instructions, tc.ExpectedLights, lights)
 		}
+	}
+}
+
+func TestPart2_solution(t *testing.T) {
+	var testCase = struct {
+		Instructions   []string
+		ExpectedLights int
+	}{
+		Instructions:   strings.Split(load.InputFileAsString("input06.txt"), "\n"),
+		ExpectedLights: 14110788,
+	}
+
+	var lights = Part2(testCase.Instructions)
+	if lights != testCase.ExpectedLights {
+		t.Errorf("Expected lights: %v\tActual lights: %v\n", testCase.ExpectedLights, lights)
 	}
 }

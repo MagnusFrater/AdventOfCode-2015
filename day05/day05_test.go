@@ -1,7 +1,10 @@
 package day05
 
 import (
+	"strings"
 	"testing"
+
+	"github.com/MagnusFrater/AdventOfCode-2015/internal/load"
 )
 
 type testCase struct {
@@ -26,6 +29,21 @@ func TestPart1(t *testing.T) {
 	}
 }
 
+func TestPart1_solution(t *testing.T) {
+	var testCase = struct {
+		Strings           []string
+		ExpectedNiceCount int
+	}{
+		Strings:           strings.Fields(load.InputFileAsString("input05.txt")),
+		ExpectedNiceCount: 255,
+	}
+
+	var niceCount = Part1(testCase.Strings)
+	if niceCount != testCase.ExpectedNiceCount {
+		t.Errorf("Expected: %v\tActual: %v\n", testCase.ExpectedNiceCount, niceCount)
+	}
+}
+
 func TestPart2(t *testing.T) {
 	var testCases = []testCase{
 		{String: "qjhvhtzxzqqjkmpb", ExpectedNiceCount: 1},
@@ -39,5 +57,20 @@ func TestPart2(t *testing.T) {
 		if niceCount != tc.ExpectedNiceCount {
 			t.Errorf("String: %v\tExpected: %v\tActual: %v\n", tc.String, tc.ExpectedNiceCount, niceCount)
 		}
+	}
+}
+
+func TestPart2_solution(t *testing.T) {
+	var testCase = struct {
+		Strings           []string
+		ExpectedNiceCount int
+	}{
+		Strings:           strings.Fields(load.InputFileAsString("input05.txt")),
+		ExpectedNiceCount: 55,
+	}
+
+	var niceCount = Part2(testCase.Strings)
+	if niceCount != testCase.ExpectedNiceCount {
+		t.Errorf("Expected: %v\tActual: %v\n", testCase.ExpectedNiceCount, niceCount)
 	}
 }
