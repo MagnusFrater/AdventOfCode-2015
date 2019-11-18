@@ -1,14 +1,22 @@
 package day08
 
-import "testing"
+import (
+	"strings"
+	"testing"
+
+	"github.com/MagnusFrater/AdventOfCode-2015/internal/load"
+)
+
+type testCase struct {
+	File          []string
+	ExpectedCount int
+}
 
 func TestGetInMemoryCharacterCount(t *testing.T) {
-	type testCase struct {
+	var testCases = []struct {
 		Line          string
 		ExpectedCount int
-	}
-
-	var testCases = []testCase{
+	}{
 		{Line: `""`, ExpectedCount: 0},
 		{Line: `"abc"`, ExpectedCount: 3},
 		{Line: `"aaa\"aaa"`, ExpectedCount: 7},
@@ -24,12 +32,10 @@ func TestGetInMemoryCharacterCount(t *testing.T) {
 }
 
 func TestGetEncodedCharacterCount(t *testing.T) {
-	type testCase struct {
+	var testCases = []struct {
 		Line, EncodedLine string
 		ExpectedCount     int
-	}
-
-	var testCases = []testCase{
+	}{
 		{Line: `""`, EncodedLine: `"\"\""`, ExpectedCount: 6},
 		{Line: `"abc"`, EncodedLine: `"\"abc\""`, ExpectedCount: 9},
 		{Line: `"aaa\"aaa"`, EncodedLine: `"\"aaa\\\"aaa\""`, ExpectedCount: 16},
@@ -46,11 +52,6 @@ func TestGetEncodedCharacterCount(t *testing.T) {
 }
 
 func TestPart1(t *testing.T) {
-	type testCase struct {
-		File          []string
-		ExpectedCount int
-	}
-
 	var tc = testCase{
 		File: []string{
 			`""`,
@@ -67,12 +68,19 @@ func TestPart1(t *testing.T) {
 	}
 }
 
-func TestPart2(t *testing.T) {
-	type testCase struct {
-		File          []string
-		ExpectedCount int
+func TestPart1_solution(t *testing.T) {
+	var tc = testCase{
+		File:          strings.Fields(load.InputFileAsString("input08.txt")),
+		ExpectedCount: 1333,
 	}
 
+	var count = Part1(tc.File)
+	if count != tc.ExpectedCount {
+		t.Errorf("Expected count: %v\tActual count: %v\n", tc.ExpectedCount, count)
+	}
+}
+
+func TestPart2(t *testing.T) {
 	var tc = testCase{
 		File: []string{
 			`""`,
@@ -81,6 +89,18 @@ func TestPart2(t *testing.T) {
 			`"\x27"`,
 		},
 		ExpectedCount: 19,
+	}
+
+	var count = Part2(tc.File)
+	if count != tc.ExpectedCount {
+		t.Errorf("Expected count: %v\tActual count: %v\n", tc.ExpectedCount, count)
+	}
+}
+
+func TestPart2_solution(t *testing.T) {
+	var tc = testCase{
+		File:          strings.Fields(load.InputFileAsString("input08.txt")),
+		ExpectedCount: 2046,
 	}
 
 	var count = Part2(tc.File)
