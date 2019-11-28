@@ -9,6 +9,6 @@ import (
 
 func main() {
 	var input = load.Input("1")
-	fmt.Println("Part 1: floor", day01.Part1(input))
-	fmt.Println("Part 2: index", day01.Part2(input))
+	fmt.Printf("Part 1: floor %v\n", day01.Part1(input))
+	fmt.Printf("Part 2: index %v\n", day01.Part2(input))
 }
