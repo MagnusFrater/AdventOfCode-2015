@@ -12,4 +12,15 @@ e.g. `go run day01/cmd/day01/main.go day01/input01.txt`
 
 ## Testing
 
+### All
+
+Must be in root folder.
+
 `go test ./...`
+
+### Day-specific
+
+1. `cd day##`
+2. `go test`
+
+Replace `##` with the number day you want to test.
